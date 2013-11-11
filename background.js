@@ -1,17 +1,42 @@
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
+/**
+ * Devtools window connector
+ */
+function init(controller) {
+    (function($) {
+        $("a.handleXhr").bind(
+            'click',
+            function(e) {
+                if(controller.handleRequest()) {
+                    controller.handleRequest(false);
+                    $(this).removeClass('enabled');
+                } else {
+                    controller.handleRequest(true);
+                    $(this).addClass('enabled');
+                }
+            }
+        );
+    })(jMicro);
+}
 
-var forpController;
+function refresh(controller) {
+    (function($) {
+        if(!controller.handleRequest()) {
+            $("a.handleXhr").removeClass('enabled');
+        } else {
+            $("a.handleXhr").addClass('enabled');
+        }
+    })(jMicro);
+}
+
 function setForpStack(stack) {
-    this.document.body.innerHTML = "";
-    (function(f) {
-        f.find("body")
+    (function($) {
+        $("div.profile")
+            .empty()
             .forp({
-            stack : stack,
-            mode : "embedded"
+                stack : stack,
+                mode : "embedded"
             });
-    })(forp);
+    })(jMicro);
 }
 
 //Handle request from devtools
@@ -21,7 +46,6 @@ chrome.extension.onConnect.addListener(function (port) {
     // chrome.extension.onMessage >> extension
     // port.onMessage >> instance
     port.onMessage.addListener(function (message, sender) {
-
         if(message.action == 'inspect') {
             chrome.tabs.executeScript(
                 null, // current tab
@@ -35,14 +59,6 @@ chrome.extension.onConnect.addListener(function (port) {
                 }
             );
         } else if(message.action == 'glueHeaderChunks') {
-            /*var chunks = [];
-            for(var i in message.request.response.headers) {
-                var header = message.request.response.headers[i];
-                if (/^X-Forp-Stack_/.test(header.name)) {
-                    var index = parseInt(header.name.replace("X-Forp-Stack_",""));
-                    chunks[index] = header.value;
-                }
-            }*/
             port.postMessage({
                 action: 'load',
                 stack: message.chunks.join('')

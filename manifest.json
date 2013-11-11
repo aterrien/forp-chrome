@@ -1,29 +1,11 @@
 {
-  // Required
   "name": "forp for Chrome",
   "version": "1.1.0",
   "manifest_version": 2,
-
-  // Recommended
   "description": "PHP live profiler. Chrome client for forp.",
-  //"icons": { ... }, // 19x19, 32x32, 48x48 and 128x128
-  //"default_locale": "en",
-
-  // Pick one (or none)
-  //"browser_action": {...},
-  //"page_action": {...},
-  //"theme": {...},
-  //"app": {...},
-
-  // Add any of these that you need
-  "background": {
-      "scripts": ["background.js", "forp/forp.min.js"]
-  },
+  "icons": {"16": "icon16.png", "48": "icon48.png", "128": "icon128.png"},
+  "background": {"scripts": ["background.js", "forp/forp.min.js"]},
   "minimum_chrome_version": "10.0",
-  "permissions": [
-    "tabs",
-    "http://*/*",
-    "https://*/*"
-  ],
+  "permissions": ["tabs","http://*/*","https://*/*"],
   "devtools_page": "devtools.html"
 }

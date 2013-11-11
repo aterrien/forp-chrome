@@ -1,11 +1,12 @@
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
+/**
+ * Forp devtools
+ */
 var ForpChrome = function () {
+    this._handleRequest = false;
     this.window = null;
     this.setWindow = function(window) {
         this.window = window;
+        this.window.init(this);
         return this;
     };
     this.importStr = function(str) {
@@ -21,10 +22,22 @@ var ForpChrome = function () {
             }
         }
     };
+    this.handleRequest = function(state) {
+        if(state != null) {
+            this._handleRequest = state;
+            return this.refresh();
+        } else {
+            return this._handleRequest;
+        }
+    }
     this.warn = function(message) {
         var messageDiv = this.window.document.getElementById("message");
         messageDiv.innerHTML = message;
-    }
+    };
+    this.refresh = function() {
+        this.window.refresh(this);
+        return this;
+    };
 };
 
 
@@ -59,16 +72,15 @@ chrome.devtools.panels.create(
                         profiler.warn("Reload the page to track forp.");
                     }
 
-                    var refreshForp = false;
                     chrome.devtools.network.onNavigated.addListener(function(url) {
-                        refreshForp = true
+                        profiler.handleRequest(true);
                     });
 
                     chrome.devtools.network.onRequestFinished.addListener(
                         function(request){
 
-                            if(!refreshForp) return;
-                            refreshForp = false;
+                            if(!profiler.handleRequest()) return;
+                            profiler.handleRequest(false);
 
                             var action = 'inspect',
                                 chunks = [];
@@ -78,10 +90,11 @@ chrome.devtools.panels.create(
                                 var header = request.response.headers[i];
                                 if (/^X-Forp-Stack_/.test(header.name)) {
                                     var index = parseInt(header.name.replace("X-Forp-Stack_",""));
-                                    chunks[index] = header.value;
+                                    chunks[index] = header.value.substr(1); // starts with "_"
                                     action = 'glueHeaderChunks';
                                 }
                             }
+
                             port.postMessage({
                                 action: action,
                                 chunks : chunks

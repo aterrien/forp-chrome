@@ -24,17 +24,32 @@
     #message {
         padding: 20px
     }
+    div.status {
+        background: #EEE;
+        color: #AAA;
+        padding:5px;
+        font-size: 12px;
+        text-align: right;
+        line-height: 12px;
+    }
+    a {
+        text-decoration: none;
+        color: #AAA;
+    }
+    a.enabled {
+        color: #F00;
+        font-weight: bold;
+    }
     </style>
 </head>
 <body>
-<div class="logo">
-    <div style="float:left;text-align:right;padding:10px 10px">forp<br>for Chrome</div>
-    <div style="float:left;"><img src="./forp/logo.png"></div>
-</div>
-<div id="message"></div>
-<!--
-    <a href="https://github.com/aterrien/forp-ui">forp-ui</a>
-    <a href="https://github.com/aterrien/forp">forp PHP profiler</a>
-/-->
+    <div class="status"><a href="#" class="handleXhr">XHR</a></div>
+    <div class="profile">
+        <div class="logo">
+            <div style="float:left;text-align:right;padding:10px 10px">forp<br>for Chrome</div>
+            <div style="float:left;"><img src="./icon128.png"></div>
+        </div>
+        <div id="message"></div>
+    </div>
 </body>
 </html>
