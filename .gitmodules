@@ -1,0 +1,3 @@
+[submodule "forp-ui"]
+	path = forp-ui
+	url = https://github.com/aterrien/forp-ui.git

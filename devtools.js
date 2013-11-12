@@ -43,7 +43,7 @@ var ForpChrome = function () {
 
 chrome.devtools.panels.create(
     "Forp",
-    "./forp/icon.png",
+    "./icon.png",
     "./panel.html",
     function(extensionPanel) {
         var runOnce = false;
