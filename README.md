@@ -8,12 +8,12 @@ It is integrated in the Chrome devtools as a new tab. It will refresh when navig
 Features
 -------
 
-- embeds forp-ui (call stack explorer, CPU and memory usage rankings, search engine ...)
-- toggle button that enable capture XHR on demand
+* embeds forp-ui (call stack explorer, CPU and memory usage rankings, search engine ...)
+* toggle button that enable capture XHR on demand
 
 Install
 -------
 
-1 - [Install forp PHP profiler on your PHP server](https://github.com/aterrien/forp-PHP-profiler/)
-2 - Install forp-php package via composer on your application
-3 - [Install forp-chrome from Chrome Web Store](https://chrome.google.com/webstore/detail/forp-for-chrome/ngfngijlafennlhobihjppmngeollbnn?hl=fr)
+* [Install forp PHP profiler on your PHP server](https://github.com/aterrien/forp-PHP-profiler/)
+* Install forp-php package via composer on your application
+* [Install forp-chrome from Chrome Web Store](https://chrome.google.com/webstore/detail/forp-for-chrome/ngfngijlafennlhobihjppmngeollbnn?hl=fr)
