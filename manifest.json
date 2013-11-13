@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "forp for Chrome",
-  "version": "1.1.0",
-  "description": "PHP live profiler. Chrome client for forp.",
+  "version": "1.1.2",
+  "description": "PHP live profiler. Chrome client for forp PHP profiler.",
   "icons": {"16": "icon16.png", "48": "icon48.png", "128": "icon128.png"},
   "background": {"scripts": ["background.js", "forp-ui/src/built/forp.min.js"]},
   "minimum_chrome_version": "10.0",
